@@ -55,7 +55,7 @@ namespace ElevatorAPI.Controllers
                 // Get the DropOff Floor >= Current Floor
                 if (car.DropOff.Count > 0)
                 {
-                    nextDropOffFloor = car.Pickup.Select(x => x).Where(x => x > car.CurrentFloor).FirstOrDefault();
+                    nextDropOffFloor = car.Pickup.Select(x => x).Where(x => x < car.CurrentFloor).FirstOrDefault();
                 }
             }
             else
@@ -68,7 +68,7 @@ namespace ElevatorAPI.Controllers
                 // Get the DropOff Floor <= Current Floor
                 if (car.DropOff.Count > 0)
                 {
-                    nextDropOffFloor = car.Pickup.Select(x => x).Where(x => x < car.CurrentFloor).FirstOrDefault();
+                    nextDropOffFloor = car.Pickup.Select(x => x).Where(x => x > car.CurrentFloor).FirstOrDefault();
                 }
             }
 
@@ -106,7 +106,7 @@ namespace ElevatorAPI.Controllers
             return car.CurrentFloor;
         }
 
-        // GET api/<ElevatorController>/?moveElevator?direction=15
+        // GET api/<ElevatorController>/moveElevator?direction=1
         [HttpGet("moveElevator")]
         public int MoveElevator([FromQuery] int direction)
         {
