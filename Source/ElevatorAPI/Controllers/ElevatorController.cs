@@ -90,6 +90,8 @@ namespace ElevatorAPI.Controllers
         [HttpGet("requestElevator")]
         public int RequestElevator([FromQuery] int floor)
         {
+            if (floor <= 0) return -1;
+
             car.Pickup.Add(floor);
             return car.CurrentFloor;
         }
@@ -98,6 +100,8 @@ namespace ElevatorAPI.Controllers
         [HttpGet("sendElevator")]
         public int SendElevator([FromQuery] int destinationFloor)
         {
+            if (destinationFloor <= 0) return -1;
+
             car.DropOff.Add(destinationFloor);
             return car.CurrentFloor;
         }
